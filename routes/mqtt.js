@@ -33,6 +33,11 @@ client.on('error', (err) => {
 client.on('message', (topic, message) => {
   if (topic === 'esp32/sensor/data') {
     console.log('Received sensor data:', message.toString());
+    client.publish('esp32/controll', message.toString(), (err) => {
+      if (!err) {
+        console.log('Message published');
+      }
+    });
     // Di sini Anda bisa menyimpan data ke database\
     apiRoutes.updateSensorData(message.toString());
   }
