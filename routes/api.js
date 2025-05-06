@@ -25,9 +25,8 @@ router.get('/latest-sensor-data', (req, res) => {
 // Middleware untuk menerima data sensor dari MQTT (bisa dipanggil dari route MQTT)
 router.updateSensorData = (data) => {
   try {
-    const parsedData = JSON.parse(data);
     sensorData.push({
-      ...parsedData,
+      data,
       timestamp: new Date().toISOString()
     });
     
